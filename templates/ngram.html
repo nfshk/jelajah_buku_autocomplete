@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jelajah Buku [NGram]</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <!-- Tambahkan logo beranda -->
+    <div class="logo-container">
+        <a href="/choose_autocomplete">
+            <img src="/static/home-logo.png" alt="Beranda" class="home-logo">
+        </a>
+    </div>
+
+
+    <div class="search-container">
+        <h1>Jelajah Buku</h1>
+        <h2>Tempat untuk Menemukan Buku yang Kamu Cari Menggunakan Autocomplete N-Gram</h2>
+        <div class="search-box-container">
+            <input type="text" id="search-box" placeholder="Ketik judul buku...">
+            <button id="search-button"><i class="fas fa-search"></i></button>
+        </div>
+        <div id="suggestions"></div>
+    </div>
+    
+    <div id="book-list"></div>
+        <!-- Tempat untuk menampilkan hasil pencarian buku -->
+    </div>
+
+    <script>
+        document.getElementById('search-button').addEventListener('click', function() {
+            const query = document.getElementById('search-box').value.trim().toLowerCase();
+            if (query) {
+                searchBooks(query);
+            }
+        });
+
+        // Fungsi untuk melakukan pencarian buku
+        function searchBooks(query) {
+            fetch(`/search?q=${encodeURIComponent(query)}`)
+                .then(response => response.json())
+                .then(data => {
+                    const bookListDiv = document.getElementById('book-list');
+                    bookListDiv.innerHTML = '';  // Bersihkan hasil sebelumnya
+                    if (data.length === 0) {
+                        bookListDiv.innerHTML = '<p>Tidak ada hasil yang ditemukan.</p>';
+                        return;
+                    }
+                    data.forEach(book => {
+                        const bookDiv = document.createElement('div');
+                        bookDiv.classList.add('book-item');
+                        const bookTitle = document.createElement('h3');
+                        bookTitle.textContent = book.title || 'Judul tidak tersedia';
+                        const bookAuthor = document.createElement('p');
+                        bookAuthor.textContent = `Penulis: ${book.author || 'Tidak diketahui'}`;
+                        const bookYear = document.createElement('p');
+                        bookYear.textContent = `Tahun: ${book.year || 'Tidak diketahui'}`;
+                        const bookPublisher = document.createElement('p');
+                        bookPublisher.textContent = `Penerbit: ${book.publisher || 'Tidak diketahui'}`;
+                        const bookImage = document.createElement('img');
+                        bookImage.src = book.image_url || 'placeholder.jpg';
+                        bookImage.alt = 'Book Cover';
+                        const bookPerplexity = document.createElement('p');
+                        bookPerplexity.textContent = `Perplexity Score: ${book.perplexity ? book.perplexity.toFixed(2) : 'Tidak tersedia'}`;
+                        bookDiv.appendChild(bookTitle);
+                        bookDiv.appendChild(bookAuthor);
+                        bookDiv.appendChild(bookYear);
+                        bookDiv.appendChild(bookPublisher);
+                        bookDiv.appendChild(bookImage);
+                        bookDiv.appendChild(bookPerplexity);
+                        bookListDiv.appendChild(bookDiv);
+                    });
+                });
+        }
+    </script>
+</body>
+</html>

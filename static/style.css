@@ -1,0 +1,192 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+    
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/5/5a/Books_HD_%288314929977%29.jpg');
+    background-size: cover; 
+    background-position: center;
+    background-attachment: fixed;
+}
+
+h1 {
+    text-align: center;
+    color: #f0f2f5;
+    margin-bottom: 10px;
+    font-weight: 700;
+    text-shadow: 2px 2px 5px #000000;
+}
+
+h2 {
+    text-align: center;
+    color: #f0f2f5;
+    margin-bottom: 40px;
+    font-size: medium;
+    font-weight: 700;
+    text-shadow: 2px 2px 5px #000000;
+}
+
+.search-box-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto 20px auto;
+    display: flex;
+    justify-content: center; 
+    gap: 20px;
+}
+
+.search-box-container button {
+    padding: 15px 30px; 
+    font-size: 20px; 
+    background-color: #997950;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.search-box-container button:hover {
+    background-color: #6f4e37;
+    transform: scale(1.05); /* Efek zoom saat hover */
+}
+
+#search-box {
+    flex: 1; 
+    padding: 15px;
+    font-size: 18px;
+    border: 1px solid #dfe1e5;
+    border-radius: 8px 0 0 8px; 
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+#search-box:focus {
+    border-color: #997950;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    outline: none;
+}
+
+#search-button {
+    padding: 15px 20px;
+    font-size: 18px;
+    background-color: #997950;
+    color: #fff;
+    border: none;
+    border-left: none; 
+    border-radius: 0 8px 8px 0; 
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#search-button:hover {
+    background-color: #6f4e37;
+}
+
+#suggestions {
+    max-width: 600px;
+    margin: 10px auto;
+    border: 1px solid #dfe1e5;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.suggestion-item {
+    padding: 15px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+    border-bottom: 1px solid #dfe1e5;
+    transition: background-color 0.2s ease;
+}
+
+#book-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    grid-gap: 20px; /* Space between items */
+    max-width: 1000px; /* Adjust as needed */
+    margin: 0 auto;
+}
+
+.book-item {
+    background-color: rgba(255, 255, 255, 0.8); 
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    gap: 3px; 
+}
+
+.book-item img {
+    max-width: 100%; 
+    height: auto;
+    border-radius: 8px;
+    margin: 10px 0; 
+}
+
+.book-item h3, 
+.book-item p {
+    margin: 5px 0;
+}
+
+#book-list-lstm {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    grid-gap: 20px; /* Space between items */
+    max-width: 1000px; /* Adjust as needed */
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 600px) {
+    #book-list {
+        grid-template-columns: 1fr; 
+    }
+    
+    .search-box-container {
+        flex-direction: column;
+    }
+    
+    #search-box, #search-button {
+        max-width: 100%;
+        border-radius: 8px; 
+        margin-bottom: 10px;
+    }
+    
+    #search-button {
+        border-radius: 8px; 
+    }
+    
+    #suggestions, #book-details {
+        max-width: 100%;
+        padding: 10px;
+    }
+}
+
+/* Styling untuk kontainer logo */
+.logo-container {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+/* Styling untuk gambar logo beranda */
+.home-logo {
+    width: 50px;  /* Sesuaikan ukuran sesuai keinginan */
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.home-logo:hover {
+    transform: scale(1.1); /* Efek zoom saat hover */
+}
+
